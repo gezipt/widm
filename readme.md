@@ -99,3 +99,4 @@ widm %>%
   widm_theme
 ```
 
+![](WIDM.png)
