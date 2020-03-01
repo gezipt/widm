@@ -27,6 +27,8 @@ widm_theme <- theme(plot.background = element_rect(fill = "black")) +
 
 
 # dataset
+#sheet <- drive_get('Wisdom of the crowd')
+#widm <- read_sheet(sheet, 'Blad2') %>%
 widm <- read_csv('~/git/widm/Moltalk verdenkingen.csv') %>%
   group_by(jaar) %>%
   replace(is.na(.), 0) %>%
@@ -40,7 +42,7 @@ widm <- read_csv('~/git/widm/Moltalk verdenkingen.csv') %>%
          ra8 = min_rank(a8)) %>%
   ungroup() %>%
   select(contains('ra'), naam, jaar) %>%
-  mutate(ra8 = ifelse(jaar == 2020 | jaar == 2017, NA, ra8),
+  mutate(ra8 = ifelse(jaar == 2017, NA, ra8),
          ra1 = ifelse(jaar == 2019, NA, ra1)) %>%
   gather(key, val, -naam, -jaar) %>%
   mutate(aflevering = as.double(gsub('ra', '', key))) %>%
@@ -68,7 +70,8 @@ widm %>%
   scale_color_manual(values = c('grey38', 'red', 'white')) +
   ggtitle('Publieksverdenkingen Moltalk per aflevering') +
   widm_theme
-  
+
+
 
 
 
